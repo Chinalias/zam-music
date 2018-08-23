@@ -305,8 +305,6 @@ client.on('ready', () => {
       console.log(`ON ${client.guilds.size} Servers '     Script By : Baktash ' `);
     console.log(`----------------`);
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(` EGY STORE.`,"http://twitch.tv/Baktash_183")
-client.user.setStatus("dnd")
 });
 
 
