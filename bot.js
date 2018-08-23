@@ -257,8 +257,8 @@ client.on('message', message => {
     });
  
  
-const adminprefix = "$$vip";
-const devs = ['331081268731052042','459203545468764160'];
+const adminprefix = "$vip";
+const devs = ['331081268731052042'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
@@ -277,12 +277,11 @@ client.user.setAvatar(argresult);
   message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
       } else     
 if (message.content.startsWith(adminprefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/baktash_183");
+  client.user.setGame(argresult, "https://www.twitch.tv/idk");
     message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
 }
 
 });
-
 
 
 client.login(process.env.BOT_TOKEN);
