@@ -283,7 +283,6 @@ if (message.content.startsWith(prefix + 'img')) {
 });
 
 
-var prefix = "$";
 client.on("message", message => {
 
             if (message.content.startsWith(prefix + "bc")) {
