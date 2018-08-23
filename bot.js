@@ -258,7 +258,7 @@ client.on('message', message => {
  
  
 const adminprefix = "$$vip";
-const devs = ['389090790984515594','459203545468764160'];
+const devs = ['331081268731052042','459203545468764160'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
