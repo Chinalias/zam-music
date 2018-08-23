@@ -7,9 +7,9 @@ const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
  
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
-const prefix = '1';
+const prefix = '$';
 client.on('ready', function() {
-    client.user.setGame(` 1help - 4 Fun `,"http://twitch.tv/Baktash_183")
+    client.user.setGame(` $help - 4 Fun `,"http://twitch.tv/Baktash_183")
     console.log(`i am ready ${client.user.username}`);
 });
 /*
