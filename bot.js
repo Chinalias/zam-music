@@ -7,9 +7,9 @@ const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
  
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
-const prefix = '$';
+const prefix = '-';
 client.on('ready', function() {
-    client.user.setGame(` $help - Zam Music`,"http://twitch.tv/Baktash_183")
+    client.user.setGame(` Baktash . `,"http://twitch.tv/Baktash_183")
     console.log(`i am ready ${client.user.username}`);
 });
 /*
@@ -50,12 +50,12 @@ client.on('message', function(message) {
     const args = message.content.split(' ').slice(1).join(' ');
  
     if (mess.startsWith(prefix + 'play')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is __** ');
         // if user is not insert the URL or song title
         if (args.length == 0) {
             let play_info = new Discord.RichEmbed()
                 .setAuthor(client.user.username, client.user.avatarURL)
-                .setFooter('طلب بواسطة: ' + message.author.tag)
+                .setFooter('Recommended: ' + message.author.tag)
                 .setDescription('**قم بإدراج رابط او اسم الأغنيه**')
             message.channel.sendEmbed(play_info)
             return;
@@ -90,61 +90,60 @@ client.on('message', function(message) {
                     if (err) throw new Error(err);
                     let play_info = new Discord.RichEmbed()
                         .setAuthor(client.user.username, client.user.avatarURL)
-                        .addField('__**تم التشغيل ✅**__', `**${videoInfo.title}
+                        .addField('__:notes: Added  __', `**${videoInfo.title}
                               **`)
                         .setColor("RANDOM")
-                        .addField(`بواسطه`, message.author.username)
+                        .addField(`Recommended`, message.author.username)
                         .setThumbnail(videoInfo.thumbnailUrl)
  
                     // .setDescription('?')
                     message.channel.sendEmbed(play_info)
-                    message.channel.send(`
-                            **${videoInfo.title}** تم تشغيل `)
+                    message.channel.send(`**  __:notes:Playing__   ${videoInfo.title}**  `)
                     // client.user.setGame(videoInfo.title,'https://www.twitch.tv/Abdulmohsen');
                 });
             });
         }
     }
     else if (mess.startsWith(prefix + 'skip')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
-        message.channel.send('`SKIPPED ✔`').then(() => {
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is.. __**');
+        message.channel.send('**__Skiped.__**').then(() => {
             skip_song(message);
             var server = server = servers[message.guild.id];
             if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
         });
     }
     else if (message.content.startsWith(prefix + 'vol')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is.. __**');
         // console.log(args)
-        if (args > 100) return message.channel.send('1 - 100 || **__لا أكثر ولا أقل__**')
-        if (args < 1) return message.channel.send('1 - 100 || **__لا أكثر ولا أقل__**')
+        if (args > 100) return message.channel.send(':no_entry_sign: Volume must be a valid integer between 0 and 100!')
+        if (args < 1) return message.channel.send(':no_entry_sign: Volume must be a valid integer between 0 and 100!')
         dispatcher.setVolume(1 * args / 50);
         message.channel.sendMessage(`**__ ${dispatcher.volume*50}% مستوى الصوت __**`);
     }
     else if (mess.startsWith(prefix + 'pause')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
-        message.channel.send('`PAUSED ✔`').then(() => {
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is..__**');
+        message.channel.send('**__Paused.__**').then(() => {
             dispatcher.pause();
         });
     }
     else if (mess.startsWith(prefix + 'resume')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
-            message.channel.send('`RESUMED ✔`').then(() => {
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is..__**');
+            message.channel.send('**__Resumed.__**').then(() => {
             dispatcher.resume();
         });
     }
     else if (mess.startsWith(prefix + 'leave')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
-        message.channel.send('`DONE ✔`');
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is..__**');
+        message.channel.send('**__Done.__**');
         var server = server = servers[message.guild.id];
         if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
     }
     else if (mess.startsWith(prefix + 'join')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
-        message.member.voiceChannel.join().then(message.channel.send('JOINED :ok:'));
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is bot__**');
+        message.member.voiceChannel.join().then(message.channel.send('**__Joined .__**'));
     }
     else if (mess.startsWith(prefix + 'play')) {
-        if (!message.member.voiceChannel) return message.channel.send(':no_entry: || **__يجب ان تكون في روم صوتي__**');
+        if (!message.member.voiceChannel) return message.channel.send(':no_entry_sign:|| ** __Your not On the Room where the bot is..__**');
         if (isPlaying == false) return message.channel.send(':anger: || **__تم التوقيف__**');
         let playing_now_info = new Discord.RichEmbed()
             .setAuthor(client.user.username, client.user.avatarURL)
@@ -152,7 +151,7 @@ client.on('message', function(message) {
                   ${videoInfo.title}
                   **`)
             .setColor("RANDOM")
-            .setFooter('طلب بواسطة: ' + message.author.tag)
+            .setFooter('Rocommended: ' + message.author.tag)
             .setThumbnail(videoInfo.thumbnailUrl)
         //.setDescription('?')
         message.channel.sendEmbed(playing_now_info);
@@ -237,7 +236,7 @@ client.on('message', message => {
          **${prefix}leave**
          خروج البوت من الروم     
          **${prefix}play**
-     امر تشغيل الأغنية , !play الرابط او اسم الأعنية
+     امر تشغيل الأغنية , kplay الرابط او اسم الأعنية
      **${prefix}skip**
      تغير الأغنية
      **${prefix}pause**
@@ -250,42 +249,37 @@ client.on('message', message => {
      PREFIX = ${prefix}
      PING = ${Date.now() - message.createdTimestamp}ms
      FOR HELP = <@331081268731052042>
-    By : ! - َBﾑKT×SH .!ء $ `)
+     `)
  
       message.channel.send({embed});
      }
     });
  
  
-const adminprefix = "$vip";
-const devs = ['459203545468764160'];
+const adminprefix = "-";
+const devs = ['331081268731052042','385529907226345482'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
     
-if (message.content.startsWith(adminprefix + 'setgame')) {
+if (message.content.startsWith(adminprefix + 'game')) {
   client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
+    message.channel.sendMessage(`**${argresult} ** __Done .__  The Bot Game Changed **`)
 } else 
-  if (message.content.startsWith(adminprefix + 'setname')) {
+  if (message.content.startsWith(adminprefix + 'name')) {
 client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
+    message.channel.sendMessage(`**${argresult}** ** __Done .__  The Bot Name Changed **`)
 return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
 } else
-  if (message.content.startsWith(adminprefix + 'setavatar')) {
+  if (message.content.startsWith(adminprefix + 'avatar')) {
 client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
+  message.channel.sendMessage(`**${argresult}** ** __Done .__  The Bot avatar Changed **`);
       } else     
-if (message.content.startsWith(adminprefix + 'setT')) {
+if (message.content.startsWith(adminprefix + 'stream')) {
   client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
+    message.channel.sendMessage(`**  The Bot stream Changed __Done .__ ${argresult}**`)
 }
 
 });
-
-
-client.login(process.env.BOT_TOKEN);
-
-
  
-
+client.login(process.env.BOT_TOKEN);
