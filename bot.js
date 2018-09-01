@@ -7,9 +7,9 @@ const getYoutubeID = require('get-youtube-id');
 const fetchVideoInfo = require('youtube-info');
  
 const yt_api_key = "AIzaSyDeoIH0u1e72AtfpwSKKOSy3IPp2UHzqi4";
-const prefix = '-';
+const prefix = 'Z';
 client.on('ready', function() {
-    client.user.setGame(` Baktash . `,"http://twitch.tv/Baktash_183")
+    client.user.setGame(` Zam-baktash . `,"http://twitch.tv/Baktash_183")
     console.log(`i am ready ${client.user.username}`);
 });
 /*
@@ -67,7 +67,7 @@ client.on('message', function(message) {
                     if (err) throw new Error(err);
                     let play_info = new Discord.RichEmbed()
                         .setAuthor(client.user.username, client.user.avatarURL)
-                        .addField('تمت إضافةالاغنيه بقائمة الإنتظار', `**
+                        .addField(':notes: Added to List', `**
                           ${videoInfo.title}
                           **`)
                         .setColor("#a637f9")
@@ -226,60 +226,151 @@ function isYoutube(str) {
     return str.toLowerCase().indexOf('youtube.com') > -1;
 }
  
+
+
 client.on('message', message => {
-     if (message.content === prefix +"help") {
-    const embed = new Discord.RichEmbed()
-     .setColor("RANDOM")
-     .addField(`**__أوامر البوت__**`,`
-         **${prefix}join**
-     عشان يدخل البوت الروم
-         **${prefix}leave**
-         خروج البوت من الروم     
-         **${prefix}play**
-     امر تشغيل الأغنية , kplay الرابط او اسم الأعنية
-     **${prefix}skip**
-     تغير الأغنية
-     **${prefix}pause**
-     ايقاف الأغنية
-     **${prefix}resume**
-     مواصلة الأغنية
-     **${prefix}vol**
-     مستوى الصوت 1-100
+if (message.content === 'Zhelp'){
+message.author.send(`
+**Zam | ♪ ..** commands:
+
+
+\`${prefix}ping\` - **checks the bot's latency**
+
+  __Music__
+
+\`${prefix}nowplaying\` - **shows the song that is currently playing**
+\`${prefix}play\` - **plays the provided song**
+\`${prefix}queue\` - **shows the current queue**
+\`${prefix}skip\` - **skip the current song**
+\`${prefix}Stop\` - **Stop the current song**
+\`${prefix}vol\` - **set volume Bot**
+\`${prefix}pause\` - **pauses the current song**
+\`${prefix}resume\` - **mresume the current song**
+\`${prefix}join\` - **Join To Room**
+\`${prefix}leave\` - **Leave From Room**
+
+__Owner__
+
+\`${prefix}setavatar <url> \` - **sets the avatar of the bot**
+\`${prefix}setname <name>\` - **sets the name of the bot**
+\`${prefix}Streaming\` - **Change Game Bot to Stream**
+\`${prefix}watching\` - **Change Game Bot to Watching**
+\`${prefix}playing\` - **Change Game Bot to Playing**
+\`${prefix}listening\` - **Change Game Bot to listening**
+\`${prefix}shutdown\` - **safely shuts down**
+
+For additional help, contact **- َBaazçhy .#9999**
+
+`);
+}});
+ 
+
+
+
+ client.on('message',async message => {
+      if(message.content.startsWith("Zrestart")){
+		  if(message.author.id !== "459203545468764160") return message.reply('You aren\'t the bot owner.');
+        message.channel.send('**Restarting.**').then(msg => {
+            setTimeout(() => {
+               msg.edit('**Restarting..**');
+            },1000);
+            setTimeout(() => {
+               msg.edit('**:white_check_mark: **').then(message =>{message.delete(5000)})
+            },2000);
+        });
+        console.log(`Restarting..`);
+        setTimeout(() => {
+            client.destroy();
+        },3000);
+    }
+});
+
+
+
+
+
+client.on('message', message => {
+       if (message.content === prefix + "about") {// This Code Edit By Mazchy . 
        
-     PREFIX = ${prefix}
-     PING = ${Date.now() - message.createdTimestamp}ms
-     FOR HELP = <@331081268731052042>
-     `)
+    (`Hello Im **- َZam . Music Bot** :notes: 
+    
+    **im owned By** - َBaazçhy .#9999
+  
+    **Type \`${prefix}help\` to see my commands!**
+    
+    **Plase invite Me To Your Server !**
+    `)  
+     .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+  .setURL('https://discordapp.com/oauth2/authorize?client_id=465693387253874694&scope=bot&permissions=2080374975')
+    message.channel.sendEmbed(embed);
+      }
+  });
+
  
-      message.channel.send({embed});
-     }
-    });
- 
- 
-const adminprefix = "-";
-const devs = ['331081268731052042','459203545468764160'];
+  client.on('message' , message => {
+    if (message.content.startsWith(prefix + "shutdown")) {
+        if(message.author.id !== "331081268731052042") return message.reply('**You aren\'t the bot owner.**');
+        if ((r=>[""].includes(r.name)) ) {
+                     message.channel.sendMessage("**Currently Shutting down...** ") // This Code Edit By Mazchy . 
+        setTimeout(function() {
+            client.destroy();
+            process.exit(0);
+        }, 2000);
+        } else {
+
+            return message.reply(`I cannot do that for you unfortunately`)
+                .then(message => {
+                    message.delete(10000);
+                }).catch(console.log);
+        }
+       
+    }
+});
+  
+
+
+
+
+
+
+
+
+const adminprefix = "Z";
+const devs = ['331081268731052042','4459203545468764160'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
     
-if (message.content.startsWith(adminprefix + 'game')) {
+if (message.content.startsWith(adminprefix + 'playing')) {
   client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} ** __Done .__  The Bot Game Changed **`)
+    message.channel.sendMessage(`Playing Now: **${argresult}**`).then(message =>{message.delete(5000)})
 } else 
   if (message.content.startsWith(adminprefix + 'name')) {
 client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** ** __Done .__  The Bot Name Changed **`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
+    message.channel.sendMessage(`Username Changed To **${argresult}**`).then(message =>{message.delete(5000)})
+
 } else
   if (message.content.startsWith(adminprefix + 'avatar')) {
 client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** ** __Done .__  The Bot avatar Changed **`);
+  message.channel.sendMessage(`Avatar Changed :white_check_mark:  `).then(message =>{message.delete(5000)});
       } else     
 if (message.content.startsWith(adminprefix + 'stream')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**  The Bot stream Changed __Done .__ ${argresult}**`)
+  client.user.setGame(argresult, "https://www.twitch.tv/Baktash_183");
+    message.channel.sendMessage(`Streaming Now: **${argresult}**`).then(message =>{message.delete(5000)})
 }
 
 });
+    
+
+
+client.on('message', message => {
+if(!message.channel.guild) return;
+if (message.content.startsWith("bping")) {
+    message.channel.sendMessage(`**Time Taken : **\`${Date.now() - message.createdTimestamp} ms\`
+**Discord API :** \`${Math.round(client.ping)}\` `);
+    }
+});
+  
+
  
 client.login(process.env.BOT_TOKEN);
